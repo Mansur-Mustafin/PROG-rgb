@@ -76,6 +76,10 @@ namespace prog {
                 add();
                 continue;
             }
+            if (command == "crop"){
+                crop();
+                continue;
+            }
         }
     }
 
@@ -214,6 +218,23 @@ namespace prog {
         }
 
         delete copy_image;
+    }
+
+    void Script::crop(){
+        int x_start, y_start, w, h;
+        input >> x_start >> y_start >> w >> h;
+        
+        Image* copy_image = new Image(w,h);
+
+        for(int x = 0; x < w; x++){
+            for(int y = 0; y < h; y++){
+                copy_image->at(x,y) = image->at(x_start + x, y_start + y);
+            }
+        }
+        
+        Image* tmp = image;
+        image = copy_image;
+        delete tmp;
     }
 
     

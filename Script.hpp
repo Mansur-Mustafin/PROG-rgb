@@ -33,6 +33,9 @@ namespace prog
     void mirror_h();
     void mirror_v();
     void add();
+    void crop();
+    void rotate_left();
+    void rotate_right();
   };
 }
 #endif
