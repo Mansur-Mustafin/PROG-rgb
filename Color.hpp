@@ -7,13 +7,21 @@ namespace prog
   class Color
   {
     private:
+      // red, green, blue color channels for color
       rgb_value r;
       rgb_value g;
       rgb_value b;
     public:
+      // Default construtor, criates black Color object
       Color();
+
+      // Copy construtor
       Color(const Color& c);
+
+      // Construtor with supplied (red, green, blue) values
       Color(rgb_value r, rgb_value g, rgb_value b);
+
+      
       rgb_value red() const;
       rgb_value& red();
       rgb_value green() const;
