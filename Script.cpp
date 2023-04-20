@@ -64,6 +64,14 @@ namespace prog {
                 fill();
                 continue;
             }
+            if (command == "h_mirror"){
+                mirror_h();
+                continue;
+            }
+            if (command == "v_mirror"){
+                mirror_v();
+                continue;
+            }
         }
     }
     void Script::open() {
@@ -142,6 +150,32 @@ namespace prog {
         for(int col = x; col < col_max; col++){
             for(int row = y; row < row_max; row++){
                 image->at(col, row) = new_color;
+            }
+        }
+    }
+    void Script::mirror_h(){
+        Color tmp = Color();
+
+        int col_n = image->width() / 2;
+        int row_n = image->height();
+        int w = image->width();
+
+        for(int x = 0; x < col_n; x++){
+            for(int y = 0; y < row_n; y++){
+                tmp = image->at(x, y);
+                image->at(x, y) = image->at(w - 1 - x, y);
+                image->at(w - 1 - x, y) = tmp;
+            }
+        }
+    }
+    void Script::mirror_v(){
+        int col_n = image->width();
+        int row_n = image->height() / 2;
+        int h = image->height();
+
+        for(int x = 0; x < col_n; x++){
+            for(int y = 0; y < row_n; y++){
+                swap(image->at(x, y), image->at(x, h - 1 - y));
             }
         }
     }
