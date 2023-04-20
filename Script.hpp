@@ -24,6 +24,9 @@ namespace prog
     void open();
     void blank();
     void save();
+
+    // ADDED FUNCTIONS:
+    void invert();
   };
 }
 #endif

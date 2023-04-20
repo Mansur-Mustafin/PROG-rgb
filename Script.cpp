@@ -48,7 +48,9 @@ namespace prog {
                 save();
                 continue;
             } 
-            // TODO ...
+            if (command == "invert"){
+                invert();
+            }
 
         }
     }
@@ -72,5 +74,15 @@ namespace prog {
         string filename;
         input >> filename;
         saveToPNG(filename, image);
+    }
+    void Script::invert(){
+        int col_n = image->width();
+        int row_n = image->height();
+
+        for(int col = 0; col < col_n; col++){
+            for(int row = 0; row < row_n; row++){
+                image->at(col, row).invert();
+            }
+        }
     }
 }
