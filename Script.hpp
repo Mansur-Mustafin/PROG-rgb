@@ -27,6 +27,7 @@ namespace prog
 
     // ADDED FUNCTIONS:
     void invert();
+    void to_gray_scale();
   };
 }
 #endif

@@ -21,7 +21,7 @@ namespace prog
       // Construtor with supplied (red, green, blue) values
       Color(rgb_value r, rgb_value g, rgb_value b);
 
-      
+      // GETTERS
       rgb_value red() const;
       rgb_value& red();
       rgb_value green() const;
@@ -30,6 +30,7 @@ namespace prog
       rgb_value& blue();
 
       void invert();
+      rgb_value get_gray();
   };
 }
 #endif

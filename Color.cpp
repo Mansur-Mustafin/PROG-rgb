@@ -37,4 +37,9 @@ namespace prog {
         g = 255 - g;
         b = 255 - b;
     }
+
+    rgb_value Color::get_gray(){
+        rgb_value v = (r + g + b) / 3;
+        return v;
+    }
 }

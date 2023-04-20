@@ -51,7 +51,9 @@ namespace prog {
             if (command == "invert"){
                 invert();
             }
-
+            if (command == "to_gray_scale"){
+                to_gray_scale();
+            }
         }
     }
     void Script::open() {
@@ -82,6 +84,18 @@ namespace prog {
         for(int col = 0; col < col_n; col++){
             for(int row = 0; row < row_n; row++){
                 image->at(col, row).invert();
+            }
+        }
+    }
+    void Script::to_gray_scale(){
+        int col_n = image->width();
+        int row_n = image->height();
+
+        for(int col = 0; col < col_n; col++){
+            for(int row = 0; row < row_n; row++){
+                rgb_value v = image->at(col, row).get_gray();
+                Color c = Color(v,v,v);
+                image->at(col, row) = c;
             }
         }
     }
