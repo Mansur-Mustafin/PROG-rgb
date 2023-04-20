@@ -72,8 +72,13 @@ namespace prog {
                 mirror_v();
                 continue;
             }
+            if (command == "add"){
+                add();
+                continue;
+            }
         }
     }
+
     void Script::open() {
         // Replace current image (if any) with image read from PNG file.
         clear_image_if_any();
@@ -81,6 +86,7 @@ namespace prog {
         input >> filename;
         image = loadFromPNG(filename);
     }
+
     void Script::blank() {
         // Replace current image (if any) with blank image.
         clear_image_if_any();
@@ -89,12 +95,14 @@ namespace prog {
         input >> w >> h >> fill;
         image = new Image(w, h, fill);
     }
+
     void Script::save() {
         // Save current image to PNG file.
         string filename;
         input >> filename;
         saveToPNG(filename, image);
     }
+
     void Script::invert(){
         int col_n = image->width();
         int row_n = image->height();
@@ -105,6 +113,7 @@ namespace prog {
             }
         }
     }
+
     void Script::to_gray_scale(){
         int col_n = image->width();
         int row_n = image->height();
@@ -117,6 +126,7 @@ namespace prog {
             }
         }
     }
+
     void Script::replace(){
         int r1, g1, b1, r2, g2, b2;
 
@@ -136,6 +146,7 @@ namespace prog {
             }
         }
     }
+
     void Script::fill(){
         int x, y, w, h, r, g, b;
 
@@ -153,6 +164,7 @@ namespace prog {
             }
         }
     }
+
     void Script::mirror_h(){
         Color tmp = Color();
 
@@ -168,6 +180,7 @@ namespace prog {
             }
         }
     }
+
     void Script::mirror_v(){
         int col_n = image->width();
         int row_n = image->height() / 2;
@@ -179,4 +192,29 @@ namespace prog {
             }
         }
     }
+
+    void Script::add(){
+        // read data
+        string filename;
+        int x_start, y_start, r, g, b;
+        input >> filename;
+        input >> r >> g >> b >> x_start >> y_start;
+        Color neutral = Color(r, g, b);
+        Image *copy_image = loadFromPNG(filename);
+
+        int max_x = copy_image->width();
+        int max_y = copy_image->height();
+
+        for(int x = 0; x < max_x; x++){
+            for(int y = 0; y < max_y; y++){
+                if(!(copy_image->at(x,y) == neutral)){
+                    image->at(x_start + x, y_start + y) = copy_image->at(x,y);
+                }
+            }
+        }
+
+        delete copy_image;
+    }
+
+    
 }

@@ -32,6 +32,7 @@ namespace prog
     void fill();
     void mirror_h();
     void mirror_v();
+    void add();
   };
 }
 #endif
