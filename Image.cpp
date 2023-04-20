@@ -11,22 +11,22 @@ namespace prog
       img[i] = fill;
     }
   }
+
   Image::~Image()
   {
     delete[] img;
   }
+
   int Image::width() const
   {
     return w;
   }
+
   int Image::height() const
   {
     return h;
   }
-
-  // TODO: remove this DUMMY_color variable once you have appropriate fields for representing image pixels.
-  Color DUMMY_color;
-
+  
   Color& Image::at(int x, int y)
   {
     if(x >= 0 && x < w && y >= 0 && y < h) return img[y * w + x];
