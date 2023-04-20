@@ -28,9 +28,11 @@ namespace prog
       rgb_value& green();
       rgb_value blue() const;
       rgb_value& blue();
-
+      
+      // WAS ADDED
       void invert();
       rgb_value get_gray();
+      bool operator==(const Color& right) const;
   };
 }
 #endif

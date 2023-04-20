@@ -50,9 +50,19 @@ namespace prog {
             } 
             if (command == "invert"){
                 invert();
+                continue;
             }
             if (command == "to_gray_scale"){
                 to_gray_scale();
+                continue;
+            }
+            if (command == "replace"){
+                replace();
+                continue;
+            }
+            if (command == "fill"){
+                fill();
+                continue;
             }
         }
     }
@@ -96,6 +106,42 @@ namespace prog {
                 rgb_value v = image->at(col, row).get_gray();
                 Color c = Color(v,v,v);
                 image->at(col, row) = c;
+            }
+        }
+    }
+    void Script::replace(){
+        int r1, g1, b1, r2, g2, b2;
+
+        input >> r1 >> g1 >> b1 >> r2 >> g2 >> b2;
+
+        Color old_color = Color(r1, g1, b1);
+        Color new_color = Color(r2, g2, b2);
+
+        int col_n = image->width();
+        int row_n = image->height();
+
+        for(int col = 0; col < col_n; col++){
+            for(int row = 0; row < row_n; row++){
+                if(image->at(col, row) == old_color){
+                    image->at(col, row) = new_color;
+                }
+            }
+        }
+    }
+    void Script::fill(){
+        int x, y, w, h, r, g, b;
+
+        input >> x >> y >> w >> h >> r >> g >> b;
+
+        Color new_color = Color(r, g, b);
+
+        int col_max = x + w;
+        int row_max = y + h;
+        
+
+        for(int col = x; col < col_max; col++){
+            for(int row = y; row < row_max; row++){
+                image->at(col, row) = new_color;
             }
         }
     }

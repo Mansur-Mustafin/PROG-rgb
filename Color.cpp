@@ -16,7 +16,7 @@ namespace prog {
     rgb_value Color::blue() const {
         return b;
     }
-
+    
     // TODO: remove this DUMMY variable once you have appropriate fields for representing colors.
     rgb_value DUMMY_rgb_value = 0; 
 
@@ -41,5 +41,10 @@ namespace prog {
     rgb_value Color::get_gray(){
         rgb_value v = (r + g + b) / 3;
         return v;
+    }
+
+    bool Color::operator==(const Color& right) const
+    {
+    return (r == right.r) && (g == right.g) && (b == right.b);
     }
 }

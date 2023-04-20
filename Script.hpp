@@ -28,6 +28,8 @@ namespace prog
     // ADDED FUNCTIONS:
     void invert();
     void to_gray_scale();
+    void replace();
+    void fill();
   };
 }
 #endif
