@@ -1,6 +1,8 @@
 #ifndef __prog_Color_hpp__
 #define __prog_Color_hpp__
 
+#include <string>
+
 namespace prog
 {
   typedef unsigned char rgb_value;
@@ -20,6 +22,8 @@ namespace prog
 
       // Construtor with supplied (red, green, blue) values
       Color(rgb_value r, rgb_value g, rgb_value b);
+
+      Color(std::string str);
 
       // GETTERS
       rgb_value red() const;

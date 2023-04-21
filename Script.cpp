@@ -1,8 +1,11 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include "Script.hpp"
 #include "PNG.hpp"
 #include "XPM2.hpp"
+#include "string"
+#include "map"
 
 using namespace std;
 
@@ -92,6 +95,11 @@ namespace prog {
                 median_filter();
                 continue;
             }
+            if (command == "xpm2_open"){
+                xpm2_open();
+                continue;
+            }
+            
         }
     }
 
@@ -291,5 +299,55 @@ namespace prog {
         image = copy_image;
         delete tmp;
     }
+
+    void Script::xpm2_open(){
+        int w = 0;
+        int h = 0;
+        int n = 0;
+        int x = 0;
+        map<char, Color> encode;
+        string filename;
+        input >> filename;
+        ifstream input_file(filename);
+        
+        string line;
+        getline(input_file, line); // ! XPM2
+        getline(input_file, line);
+        stringstream ss(line);
+        ss >> w >> h >> n >> x;
+        Image* copy_image = new Image(w,h);
+        
+        while(n){
+            n--;
+            getline(input_file, line);
+            char key = line[0];
+            Color value = Color(line.substr(5));
+            encode[key] = value;
+        }
+
+        x = 0;
+        int y = 0;
+
+        for (auto const& element : encode) {
+    std::cout << "Key: " << element.first << ", Value: (" << (int)element.second.red() << ", " << (int)element.second.green() << ", " << (int)element.second.blue() << ")" << std::endl;
+}
+
+        while(getline(input_file, line)){
+            for(char c : line){
+                if(x >= w){
+                    continue;
+                }
+                copy_image->at(x,y) = encode[c];
+                x++;
+            }
+            x = 0;
+            y++;
+        }
+
+        Image* tmp = image;
+        image = copy_image;
+        delete tmp;
+    }
+
 
 }
