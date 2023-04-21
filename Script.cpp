@@ -80,6 +80,18 @@ namespace prog {
                 crop();
                 continue;
             }
+            if (command == "rotate_left"){
+                rotate_left();
+                continue;
+            }
+            if (command == "rotate_right"){
+                rotate_right();
+                continue;
+            }
+            if (command == "median_filter"){
+                median_filter();
+                continue;
+            }
         }
     }
 
@@ -237,5 +249,47 @@ namespace prog {
         delete tmp;
     }
 
-    
+    void Script::rotate_left(){
+        int w = image->width();
+        int h = image->height();
+        Image* copy_image = new Image(h,w);
+
+        for(int x = 0; x < w; x++){
+            for(int y = 0; y < h; y++){
+                copy_image->at(y, w - x - 1) = image->at(x, y);
+            }
+        }
+        
+
+        Image* tmp = image;
+        image = copy_image;
+        delete tmp;
+    }
+
+    void Script::rotate_right(){
+        rotate_left();
+        rotate_left();
+        rotate_left();
+    }
+
+    void Script::median_filter(){
+        int ws;
+        input >> ws;
+        int w = image->width();
+        int h = image->height();
+        Image* copy_image = new Image(w,h);
+
+
+        for(int x = 0; x < w; x++){
+            for(int y = 0; y < h; y++){
+
+                copy_image->at(x,y) = image->media(x, y, ws);
+            }
+        }
+        
+        Image* tmp = image;
+        image = copy_image;
+        delete tmp;
+    }
+
 }

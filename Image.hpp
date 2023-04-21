@@ -35,6 +35,8 @@ namespace prog
     // x -> the column index in matrix
     // y -> the raw index in matrix
     const Color &at(int x, int y) const;
+
+    Color media(int x, int y, int ws);
   };
 }
 #endif
