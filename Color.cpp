@@ -67,5 +67,26 @@ namespace prog {
     return (r == right.r) && (g == right.g) && (b == right.b);
     }
 
+    bool Color::operator<(const Color& right) const{
+        if(r < right.r) return true;
+        else if(r > right.r) return false;
+        else if(g < right.g) return true;
+        else if(g > right.g) return false;
+        else if(b < right.b) return true;
+        else return false;
+    }
+
+    std::ostream& operator<< (std::ostream& out, const Color& c){
+        out << "#" << std::hex << std::uppercase;
+
+        for (const auto& color : {c.red(), c.green(), c.blue()}) {
+            if (color < 16) out << "0";
+            out << (color & 0xFF);
+        }
+
+        out << std::dec;
+        return out;
+    }
+    
     
 }

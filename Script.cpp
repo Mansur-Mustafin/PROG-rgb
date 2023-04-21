@@ -99,7 +99,10 @@ namespace prog {
                 xpm2_open();
                 continue;
             }
-            
+            if (command == "xpm2_save"){
+                xpm2_save();
+                continue;
+            }
         }
     }
 
@@ -301,53 +304,17 @@ namespace prog {
     }
 
     void Script::xpm2_open(){
-        int w = 0;
-        int h = 0;
-        int n = 0;
-        int x = 0;
-        map<char, Color> encode;
         string filename;
         input >> filename;
-        ifstream input_file(filename);
-        
-        string line;
-        getline(input_file, line); // ! XPM2
-        getline(input_file, line);
-        stringstream ss(line);
-        ss >> w >> h >> n >> x;
-        Image* copy_image = new Image(w,h);
-        
-        while(n){
-            n--;
-            getline(input_file, line);
-            char key = line[0];
-            Color value = Color(line.substr(5));
-            encode[key] = value;
-        }
-
-        x = 0;
-        int y = 0;
-
-        for (auto const& element : encode) {
-    std::cout << "Key: " << element.first << ", Value: (" << (int)element.second.red() << ", " << (int)element.second.green() << ", " << (int)element.second.blue() << ")" << std::endl;
-}
-
-        while(getline(input_file, line)){
-            for(char c : line){
-                if(x >= w){
-                    continue;
-                }
-                copy_image->at(x,y) = encode[c];
-                x++;
-            }
-            x = 0;
-            y++;
-        }
-
+        Image* copy_image = loadFromXPM2(filename);
         Image* tmp = image;
         image = copy_image;
         delete tmp;
     }
 
-
+    void Script::xpm2_save(){
+        string filename;
+        input >> filename;
+        saveToXPM2(filename, image);
+    }
 }

@@ -2,6 +2,7 @@
 #define __prog_Color_hpp__
 
 #include <string>
+#include <iostream>
 
 namespace prog
 {
@@ -37,6 +38,8 @@ namespace prog
       void invert();
       rgb_value get_gray();
       bool operator==(const Color& right) const;
+      friend std::ostream& operator<< (std::ostream& out, const Color& s1);
+      bool operator<(const Color& right) const;
   };
 }
 #endif

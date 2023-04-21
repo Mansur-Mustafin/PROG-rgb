@@ -38,6 +38,7 @@ namespace prog
     void rotate_right();
     void median_filter();
     void xpm2_open();
+    void xpm2_save();
   };
 }
 #endif
