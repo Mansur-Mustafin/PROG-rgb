@@ -139,6 +139,7 @@ namespace prog {
                 image->at(col, row).invert();
             }
         }
+        return;
     }
 
     void Script::to_gray_scale(){
@@ -152,6 +153,7 @@ namespace prog {
                 image->at(col, row) = c;
             }
         }
+        return;
     }
 
     void Script::replace(){
@@ -172,6 +174,7 @@ namespace prog {
                 }
             }
         }
+        return;
     }
 
     void Script::fill(){
@@ -190,11 +193,11 @@ namespace prog {
                 image->at(col, row) = new_color;
             }
         }
+        return;
     }
 
     void Script::mirror_h(){
         Color tmp = Color();
-
         int col_n = image->width() / 2;
         int row_n = image->height();
         int w = image->width();
@@ -206,6 +209,7 @@ namespace prog {
                 image->at(w - 1 - x, y) = tmp;
             }
         }
+        return;
     }
 
     void Script::mirror_v(){
@@ -218,17 +222,16 @@ namespace prog {
                 swap(image->at(x, y), image->at(x, h - 1 - y));
             }
         }
+        return;
     }
 
     void Script::add(){
-        // read data
         string filename;
         int x_start, y_start, r, g, b;
         input >> filename;
         input >> r >> g >> b >> x_start >> y_start;
         Color neutral = Color(r, g, b);
         Image *copy_image = loadFromPNG(filename);
-
         int max_x = copy_image->width();
         int max_y = copy_image->height();
 
@@ -241,12 +244,12 @@ namespace prog {
         }
 
         delete copy_image;
+        return;
     }
 
     void Script::crop(){
         int x_start, y_start, w, h;
         input >> x_start >> y_start >> w >> h;
-        
         Image* copy_image = new Image(w,h);
 
         for(int x = 0; x < w; x++){
@@ -258,6 +261,7 @@ namespace prog {
         Image* tmp = image;
         image = copy_image;
         delete tmp;
+        return;
     }
 
     void Script::rotate_left(){
@@ -271,16 +275,32 @@ namespace prog {
             }
         }
         
-
         Image* tmp = image;
         image = copy_image;
         delete tmp;
+        return;
     }
 
     void Script::rotate_right(){
+        /* For fun, se viramos 3 vezes a esquerda => viramos 1 vez a direta. 
         rotate_left();
         rotate_left();
         rotate_left();
+        */
+        int w = image->width();
+        int h = image->height();
+        Image* copy_image = new Image(h,w);
+
+        for(int x = 0; x < w; x++){
+            for(int y = 0; y < h; y++){
+                copy_image->at(h - y - 1, x) = image->at(x, y);
+            }
+        }
+        
+        Image* tmp = image;
+        image = copy_image;
+        delete tmp;
+        return;
     }
 
     void Script::median_filter(){
@@ -290,10 +310,8 @@ namespace prog {
         int h = image->height();
         Image* copy_image = new Image(w,h);
 
-
         for(int x = 0; x < w; x++){
             for(int y = 0; y < h; y++){
-
                 copy_image->at(x,y) = image->media(x, y, ws);
             }
         }
@@ -301,6 +319,7 @@ namespace prog {
         Image* tmp = image;
         image = copy_image;
         delete tmp;
+        return;
     }
 
     void Script::xpm2_open(){
@@ -310,11 +329,13 @@ namespace prog {
         Image* tmp = image;
         image = copy_image;
         delete tmp;
+        return;
     }
 
     void Script::xpm2_save(){
         string filename;
         input >> filename;
         saveToXPM2(filename, image);
+        return;
     }
 }

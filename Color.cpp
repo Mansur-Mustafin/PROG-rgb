@@ -35,10 +35,6 @@ namespace prog {
     rgb_value Color::blue() const {
         return b;
     }
-    
-    // TODO: remove this DUMMY variable once you have appropriate fields for representing colors.
-    rgb_value DUMMY_rgb_value = 0; 
-
     rgb_value& Color::red()  {
         return this->r;
     }

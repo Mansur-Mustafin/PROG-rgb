@@ -51,6 +51,7 @@ namespace prog {
         int h = image->height();
         map<Color, char> colors;
         int i = 33;
+        
         for(int x = 0; x < w; x++){
             for(int y = 0; y < h; y++){
                 if(colors.find(image->at(x,y)) == colors.end()){
