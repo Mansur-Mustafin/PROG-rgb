@@ -1,6 +1,8 @@
 #ifndef __prog_Image_hpp__
 #define __prog_Image_hpp__
 #include "Color.hpp"
+#include <numeric>
+#include <vector>
 
 namespace prog
 {
@@ -38,6 +40,8 @@ namespace prog
 
     // return the media color in segment with center (x, y) and width and height = ws.
     Color media(int x, int y, int ws);
+
+    int histogram_median(std::vector<int>& histogram);
   };
 }
 #endif
