@@ -1,6 +1,5 @@
 #include "Color.hpp"
 
-
 namespace prog {
     Color::Color(): r(0), g(0), b(0) {} // black
 
@@ -20,7 +19,7 @@ namespace prog {
         return 0;
     }
 
-    Color::Color(std::string str){
+    Color::Color(std::string str) {
         this->r = getInt(str[0]) * 16 + getInt(str[1]);
         this->g = getInt(str[2]) * 16 + getInt(str[3]);
         this->b = getInt(str[4]) * 16 + getInt(str[5]);
@@ -39,31 +38,30 @@ namespace prog {
         return this->r;
     }
     rgb_value& Color::green()  {
-      return this->g;
+        return this->g;
     }
     rgb_value& Color::blue()  {
-      return this->b;
+        return this->b;
     }
 
     // ADDED FUNCTIONS
 
-    void Color::invert(){
+    void Color::invert() {
         r = 255 - r;
         g = 255 - g;
         b = 255 - b;
     }
 
-    rgb_value Color::get_gray(){
+    rgb_value Color::get_gray() {
         rgb_value v = (r + g + b) / 3;
         return v;
     }
 
-    bool Color::operator==(const Color& right) const
-    {
-    return (r == right.r) && (g == right.g) && (b == right.b);
+    bool Color::operator==(const Color& right) const {
+        return (r == right.r) && (g == right.g) && (b == right.b);
     }
 
-    bool Color::operator<(const Color& right) const{
+    bool Color::operator<(const Color& right) const {
         if(r < right.r) return true;
         else if(r > right.r) return false;
         else if(g < right.g) return true;
@@ -83,6 +81,5 @@ namespace prog {
         out << std::dec;
         return out;
     }
-    
     
 }

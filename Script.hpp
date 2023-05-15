@@ -1,9 +1,15 @@
 #ifndef __prog_Script_hpp__
 #define __prog_Script_hpp__
 
-#include <string>
 #include <fstream>
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <string>
 #include "Image.hpp"
+#include "PNG.hpp"
+#include "XPM2.hpp"
+
 
 namespace prog
 {

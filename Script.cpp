@@ -1,11 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include "Script.hpp"
-#include "PNG.hpp"
-#include "XPM2.hpp"
-#include "string"
-#include "map"
 
 using namespace std;
 
@@ -186,7 +179,6 @@ namespace prog {
 
         int col_max = x + w;
         int row_max = y + h;
-        
 
         for(int col = x; col < col_max; col++){
             for(int row = y; row < row_max; row++){
@@ -209,6 +201,7 @@ namespace prog {
                 image->at(w - 1 - x, y) = tmp;
             }
         }
+
         return;
     }
 
@@ -222,6 +215,7 @@ namespace prog {
                 swap(image->at(x, y), image->at(x, h - 1 - y));
             }
         }
+
         return;
     }
 
@@ -258,9 +252,8 @@ namespace prog {
             }
         }
         
-        Image* tmp = image;
+        delete image;
         image = copy_image;
-        delete tmp;
         return;
     }
 
@@ -275,14 +268,14 @@ namespace prog {
             }
         }
         
-        Image* tmp = image;
+        delete image;
         image = copy_image;
-        delete tmp;
         return;
     }
 
     void Script::rotate_right(){
-        /* For fun, se viramos 3 vezes a esquerda => viramos 1 vez a direta. 
+        /* 
+        For fun: viramos 3 vezes a esquerda => viramos 1 vez a direta. 
         rotate_left();
         rotate_left();
         rotate_left();
@@ -297,9 +290,8 @@ namespace prog {
             }
         }
         
-        Image* tmp = image;
+        delete image;
         image = copy_image;
-        delete tmp;
         return;
     }
 
@@ -316,26 +308,28 @@ namespace prog {
             }
         }
         
-        Image* tmp = image;
+        delete image;
         image = copy_image;
-        delete tmp;
         return;
     }
 
     void Script::xpm2_open(){
         string filename;
         input >> filename;
+
         Image* copy_image = loadFromXPM2(filename);
-        Image* tmp = image;
+
+        delete image;
         image = copy_image;
-        delete tmp;
         return;
     }
 
     void Script::xpm2_save(){
         string filename;
         input >> filename;
+
         saveToXPM2(filename, image);
+
         return;
     }
 }

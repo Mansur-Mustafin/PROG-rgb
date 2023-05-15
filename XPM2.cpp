@@ -1,13 +1,11 @@
 #include "XPM2.hpp"
+
 using namespace std;
 
 namespace prog {
     
     Image* loadFromXPM2(const std::string& file) {
-        int w = 0;
-        int h = 0;
-        int n = 0;
-        int x = 0;
+        int w = 0, h = 0, n = 0, x = 0;
         map<char, Color> encode;
         ifstream input_file(file);
         
@@ -31,9 +29,7 @@ namespace prog {
 
         while(getline(input_file, line)){
             for(char c : line){
-                if(x >= w){
-                    continue;
-                }
+                if(x >= w) continue;
                 copy_image->at(x,y) = encode[c];
                 x++;
             }
@@ -60,6 +56,7 @@ namespace prog {
                 }
             }
         }
+
         out << w << ' ' << h << ' ' << i - 33 << ' ' << 1 << endl;
 
         for(auto el: colors){
@@ -68,10 +65,10 @@ namespace prog {
 
         for(int y = 0; y < h; y++){
             for(int x = 0; x < w; x++){
-                out << (char)colors[image->at(x,y)];
+                out << (char) colors[image->at(x,y)];
             }
             out << endl;
         }
-
+        return;
     }
 }
